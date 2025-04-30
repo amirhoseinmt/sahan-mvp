@@ -1,4 +1,4 @@
-const url = "http://127.0.0.1:8000/process-text/";
+const url = "http://sahanai.liara.run:8000/process-text/";
 const data = { text: "سلام عالی بود" };
 
 fetch(url, {

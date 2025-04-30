@@ -56,9 +56,9 @@ export async function POST(req: NextRequest) {
       savedComments.map(async ({ id, text }) => {
         try {
           const response = await axios.post(
-            `http://127.0.0.1:8000/process-text/`,
+            `http://sahanai.liara.run/process-text/`,
             new URLSearchParams({ text }),
-            { 
+            {
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
               proxy: false,
             }
