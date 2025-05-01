@@ -121,25 +121,32 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    for (const { id, text } of doc.comments) {
-      try {
-        const response = await axios.post(
-          `https://sahanai.liara.run/process-text/`,
-          new URLSearchParams({ text }),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            timeout: 8000,
-            proxy: false,
-          }
-        );
+    const batchSize = 5;
+    for (let i = 0; i < doc.comments.length; i += batchSize) {
+      const batch = doc.comments.slice(i, i + batchSize);
 
-        const { sentiment, accuracy } = response.data;
-        await saveCommentAnalysis(id, sentiment, accuracy);
-      } catch (err) {
-        console.error("❌ Error analyzing comment:", text, err);
-      }
+      await Promise.all(
+        batch.map(async ({ id, text }: { id: string; text: string }) => {
+          try {
+            const response = await axios.post(
+              `https://sahanai.liara.run/process-text/`,
+              new URLSearchParams({ text }),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                timeout: 300000,
+                proxy: false,
+              }
+            );
+
+            const { sentiment, accuracy } = response.data;
+            await saveCommentAnalysis(id, sentiment, accuracy);
+          } catch (err) {
+            console.error("❌ Error analyzing comment:", text, err);
+          }
+        })
+      );
     }
 
     await updateDocSentimentCounts(docId);
