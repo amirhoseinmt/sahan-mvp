@@ -348,7 +348,7 @@ const Page = () => {
                 <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-4 md:gap-8">
                   <a
                     href={`/dashboard/${slug}/analyse/${doc.id}`}
-                    className="text-sm border border-[#229987] px-3 py-2 rounded-md text-[#229987] hover:text-white hover:bg-[#229987] duration-100"
+                    className="text-sm border border-[#229987] px-3 py-3 rounded-md text-[#229987] hover:text-white hover:bg-[#229987] duration-100"
                   >
                     جزئیات آنالیز
                   </a>
@@ -369,7 +369,7 @@ const Page = () => {
                   <button
                     onClick={() => deleteMutation.mutate(doc.id)}
                     disabled={deletingDocId === doc.id}
-                    className="text-red-500 hover:text-red-800 transition px-2 py-2 rounded-md border"
+                    className="text-red-500 hover:text-red-800 transition px-2  rounded-md border"
                   >
                     <Trash
                       size={18}
