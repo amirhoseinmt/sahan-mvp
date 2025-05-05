@@ -17,19 +17,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
         <div className="relative">
           <div className="container px-4 py-8">
-            {/* Header */}
             <Header />
-
-            {/* Hero Section */}
             <Hero plansRef={plansRef} />
           </div>
         </div>
       </section>
-
       <section className="container w-full py-12 md:py-24 lg:py-32 bg-background">
         <Plans plansRef={plansRef} />
       </section>
-
       <section>
         <Footer />
       </section>
